@@ -62,7 +62,7 @@ class Home extends React.Component {
             
                   
 		  
-		  <Table dataProp={this.state.star_wars_characters} />
+		  <Table dataProp={this.state.data} />
                
          </div>
       );
