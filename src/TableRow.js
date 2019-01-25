@@ -11,9 +11,12 @@ class TableRow extends React.Component {
 	
 	
    open_new_tab() {
-	   const url = 'https://github.com/silasonyango93/my_react/blob/master/src/Home.js';
-        window.open(url, '_blank');
-	   console.log("Imekubali");
+	   const url = 'http://localhost:3000/about';
+       var character_url = this.props.data.url;
+	   character_url=character_url+"?format=json";
+	   var w = window.open(url);
+	   w.character_url = character_url;
+	   
     }  
 	
    render() {
