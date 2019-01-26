@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaHeart } from 'react-icons/fa';
 class TableRow extends React.Component {
 	
   constructor(props) {
@@ -27,6 +28,8 @@ class TableRow extends React.Component {
             <td>{this.props.data.height}</td>
             <td>{this.props.data.mass}</td>
 		    <td>{this.props.data.gender}</td>
+		  <td><FaHeart /></td>
+		  
          </tr>
 		  
             
