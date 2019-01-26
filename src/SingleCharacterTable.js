@@ -6,25 +6,18 @@ class SingleCharacterTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: this.props.dataProp,home_world_details:[] };//this.props.dataProp populates the first table while home_world_details:[] populates the second table
+    this.state = { data: this.props.dataProp,home_world_details:[] };
     console.log(this.props.dataProp.name);
 	  
 	  
   }
 	
-   componentDidMount() {
-	   /*The line below should be replaced with 
-	   
-	   var home_world_url =this.props.dataProp.homeworld;
-	   
-	   However, when i console.log(home_world_url); after this assignment,it remains
-	   undefined yet the data in the table below uses the data from this.props.dataProp.*
-	   and the "this.props.dataProp.homeworld" is one of the rows on the table and it is rendering.Check the  table on a browser
-	   
-	   */
-	   
-	  var home_world_url = "https://swapi.co/api/planets/1/";//I have hard-coded this url.It should be fetched from this.props.dataProp.homeworld, which is not working
-	                                                         //Data from this url is used to feed the second table below.It is fed into this.state.home_world_details array
+   
+	
+	
+	componentDidUpdate(){
+	
+	var home_world_url = this.props.dataProp.homeworld;
 	  home_world_url=home_world_url+"?format=json";
     fetch(home_world_url)
       .then(response => {
@@ -38,7 +31,7 @@ class SingleCharacterTable extends React.Component {
         });
       });
 console.log(home_world_url);
-  }
+	}
 	
   render() {
     return (
