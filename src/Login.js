@@ -2,11 +2,12 @@ import React from "react";
 
 
 class Login extends React.Component {
-  constructor(props) {
+constructor(props) {
     super(props);
     this.state = {
         AttemptedUserName: '',
-		AttemptedPassword: ''
+		AttemptedPassword: '',
+		login_credentials:[]
 		
     };
 
@@ -15,8 +16,8 @@ class Login extends React.Component {
 	  this.handleChange = this.handleChange.bind(this);
   }
 
-  componentDidMount() {
-    
+  componentDidUpdate() {
+    console.log(this.state.login_credentials);
 
   }
 	
@@ -40,15 +41,20 @@ class Login extends React.Component {
           login_credentials: data
         });
       });
-     console.log(this.state.AttemptedUserName);//Returns undefined
+     //Returns undefined
  }
    
 	
 	
-	handleChange(event) {
-        this.setState({AttemptedUserName: event.target.AttemptedUserName});
-		this.setState({AttemptedPassword: event.target.AttemptedPassword});
+	handleChange(event) {    
+    let newState = this.state
+    newState[event.target.name] = event.target.value
+    let prop = event.target.name
+        this.setState({
+          ...newState     
+        });
 		
+	
     }
 
   render() {
@@ -65,10 +71,10 @@ class Login extends React.Component {
                         <form action="" method="POST" onSubmit={this.handleSubmit} encType="multipart/form-data">
                             <fieldset>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="UserName" value={this.state.AttemptedUserName} type="text" onChange={this.handleChange} autofocus />
+                                    <input name="AttemptedUserName" class="form-control" placeholder="UserName" value={this.state.AttemptedUserName} type="text" onChange={this.handleChange} autofocus />
                                 </div>
                                 <div class="form-group">
-                                    <input class="form-control" placeholder="Password" value={this.state.AttemptedPassword} type="password" onChange={this.handleChange} />
+                                    <input name="AttemptedPassword" class="form-control" placeholder="Password" value={this.state.AttemptedPassword} type="password" onChange={this.handleChange} />
                                 </div>
                                 <div class="checkbox">
                                     <label>
@@ -84,6 +90,8 @@ class Login extends React.Component {
             </div>
         </div>
     </div>
+        
+        <div>{JSON.stringify(this.state)}</div>
       </div>
     );
   }
