@@ -1,6 +1,9 @@
 import React from "react";
 import axios from "axios";
 import querystring from "querystring";
+import  { Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Table from "./Table.js";
 
 class Login extends React.Component {
 constructor(props) {
@@ -8,6 +11,7 @@ constructor(props) {
     this.state = {
         AttemptedUserName: '',
 		AttemptedPassword: '',
+		login_error:true,
 		login_credentials:[]
 		
     };
@@ -15,6 +19,7 @@ constructor(props) {
       
 	  this.handleSubmit = this.handleSubmit.bind(this);
 	  this.handleChange = this.handleChange.bind(this);
+	  
   }
 
   componentDidUpdate() {
@@ -28,10 +33,17 @@ constructor(props) {
 		
 		
       axios.post('http://127.0.0.1:5000/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }))
-		.then(function (response) {
-        
-      })
-     .catch(function (response) {
+		.then((response) => {
+        this.setState({
+          ...this.state,
+          login_credentials: response.data,login_error:response.data.error
+			
+        });
+        window.sessionStorage.setItem("UserId", response.data.UserId);
+		window.sessionStorage.setItem("UserName", response.data.UserName); 
+		this.my_router();
+    } )
+     .catch((response) => {
         //handle error
         console.log(response);
       });
@@ -48,12 +60,22 @@ constructor(props) {
           ...newState     
         });
 		
+	}
 	
-    }
+	
+	my_router = () => {
+		if(!(this.state.login_error)){this.props.history.push('/home')}else{this.props.history.push('/')}
+    
+  }
+	
+    
 
   render() {
     return (
       <div>
+		<Router>
+		<Route path="/login" component={Login} />
+		</Router>
         <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
