@@ -17,13 +17,13 @@ constructor(props) {
   }
 
   componentDidUpdate() {
-    console.log(this.state.login_credentials);
+    //console.log(this.state.login_credentials);
 
   }
 	
 	handleSubmit(event){ 
       event.preventDefault();
-      fetch('http://35.226.21.250:80/user_login', {//It connects to the server but passes null values to the server
+      fetch('http://35.226.21.250:80/user_login', {
       method: 'post',
       headers: {'Content-Type':'application/json'},
       body: {
@@ -41,7 +41,7 @@ constructor(props) {
           login_credentials: data
         });
       });
-     //Returns undefined
+     console.log(this.state.AttemptedUserName);
  }
    
 	
