@@ -1,4 +1,7 @@
 import React from "react";
+import { FaHeart } from 'react-icons/fa';
+import axios from "axios";
+import querystring from "querystring";
 
 import SingleCharacterTableHeader from "./SingleCharacterTableHeader.js";
 
@@ -6,17 +9,26 @@ class SingleCharacterTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: this.props.dataProp,home_world_details:[] };
+    this.state = { data: this.props.dataProp,home_world_details:[], current_like_icon_colour:'black',UserId:'' };
     console.log(this.props.dataProp.name);
 	  
-	  
+	this.on_like_icon_pressed = this.on_like_icon_pressed.bind(this);  
   }
 	
+   componentDidMount() {
+	   var user_id=window.sessionStorage.getItem("UserId");
+       this.setState({
+          ...this.state,
+          UserId: user_id
+        });
    
+   }
 	
 	
 	componentDidUpdate(){
-	
+	//var user_name=window.sessionStorage.getItem("UserName");
+		
+		
 	var home_world_url = this.props.dataProp.homeworld;
 	  home_world_url=home_world_url+"?format=json";
     fetch(home_world_url)
@@ -33,6 +45,33 @@ class SingleCharacterTable extends React.Component {
 console.log(home_world_url);
 	}
 	
+	
+	
+	on_like_icon_pressed(){
+		this.setState({
+          ...this.state,
+          current_like_icon_colour:'red'
+        });
+		
+		
+		axios.post('http://127.0.0.1:5000/add_my_favorites', querystring.stringify({UserId: this.state.UserId,
+																			  Name: this.props.dataProp.name,
+																			  Height: this.props.dataProp.height,
+																			  Mass: this.props.dataProp.mass,
+																			  Gender: this.props.dataProp.gender,
+																			  Url: this.props.dataProp.url}))
+		.then((response) => {
+        console.log(response);
+			
+        })
+        
+    
+     .catch((response) => {
+        //handle error
+        console.log(response);
+      });
+	}
+	
   render() {
     return (
 		<div>
@@ -40,7 +79,7 @@ console.log(home_world_url);
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default">
-            <div class="panel-heading">Personal Detalis</div>
+            <div class="panel-heading">Personal Detalis  <FaHeart style={{marginLeft: 70 + 'em',color:this.state.current_like_icon_colour}} onClick={this.on_like_icon_pressed}/> </div>
 
             <div class="panel-body">
               <table
