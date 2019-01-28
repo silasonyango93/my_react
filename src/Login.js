@@ -1,5 +1,6 @@
 import React from "react";
-
+import axios from "axios";
+import querystring from "querystring";
 
 class Login extends React.Component {
 constructor(props) {
@@ -23,24 +24,10 @@ constructor(props) {
 	
 	handleSubmit(event){ 
       event.preventDefault();
-      fetch('http://35.226.21.250:80/user_login', {
-      method: 'post',
-      headers: {'Content-Type':'application/json'},
-      body: {
-          "AttemptedUserName": this.state.AttemptedUserName,
-		  "AttemptedPassword": this.state.AttemptedPassword
-        }
-      })
-		.then(response => {
-        return response.json();
-      })
-      .then(data => {
-       console.log(data);
-        this.setState({
-          ...this.state,
-          login_credentials: data
-        });
-      });
+		
+		
+		
+      axios.post('http://127.0.0.1:5000/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }));
      console.log(this.state.AttemptedUserName);
  }
    
