@@ -27,7 +27,15 @@ constructor(props) {
 		
 		
 		
-      axios.post('http://127.0.0.1:5000/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }));
+      axios.post('http://127.0.0.1:5000/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }))
+		.then(function (response) {
+        //handle success
+        console.log(response);
+      })
+     .catch(function (response) {
+        //handle error
+        console.log(response);
+      });
      console.log(this.state.AttemptedUserName);
  }
    
@@ -78,7 +86,7 @@ constructor(props) {
         </div>
     </div>
         
-        <div>{JSON.stringify(this.state)}</div>
+       /* <div>{JSON.stringify(this.state)}</div>*/
       </div>
     );
   }
