@@ -59,7 +59,7 @@ console.log(home_world_url);
 	on_trash_icon_pressed(){
 		var user_id=window.sessionStorage.getItem("UserId");
 		
-		axios.post('http://35.226.21.250:80/delete_individual_my_favorites', querystring.stringify({UserIdColumnName: "UserId",
+		axios.post('http://35.188.176.184:80/delete_individual_my_favorites', querystring.stringify({UserIdColumnName: "UserId",
 																			    user_id_value: user_id,
 																				column_name: "url",
 																				search_value: this.props.dataProp.url

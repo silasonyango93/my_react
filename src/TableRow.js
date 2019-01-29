@@ -15,7 +15,7 @@ class TableRow extends React.Component {
 	
 	
    open_new_tab() {
-	   const url = 'http://35.226.21.250:3000/about';
+	   const url = 'http://35.188.176.184:3000/about';
        var character_url = this.props.data.url;
 	   character_url=character_url+"?format=json";
 	   var w = window.open(url);
@@ -43,7 +43,7 @@ class TableRow extends React.Component {
 	  
       
 	  
-    axios.post('http://35.226.21.250:80/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
+    axios.post('http://35.188.176.184:80/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
 																			    search_value: user_id,
 																			  }))
 		.then((response) => {

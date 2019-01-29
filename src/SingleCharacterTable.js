@@ -88,7 +88,7 @@ console.log(home_world_url);
 	
 	get_number_of_records(){
 	var user_id=window.sessionStorage.getItem("UserId");
-	 axios.post('http://35.226.21.250:80/get_number_of_records', querystring.stringify({column_name: "UserId",
+	 axios.post('http://35.188.176.184:80/get_number_of_records', querystring.stringify({column_name: "UserId",
 																			    search_value: user_id,
 																			  }))
 		.then((response) => {
@@ -122,7 +122,7 @@ console.log(home_world_url);
           current_like_icon_colour:'red'
         });
 	
-	axios.post('http://35.226.21.250:80/add_my_favorites', querystring.stringify({UserId: this.state.UserId,
+	axios.post('http://35.188.176.184:80/add_my_favorites', querystring.stringify({UserId: this.state.UserId,
 																			  name: this.props.dataProp.name,
 																			  height: this.props.dataProp.height,
 																			  mass: this.props.dataProp.mass,
