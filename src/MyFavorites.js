@@ -1,6 +1,6 @@
 import React from "react";
 import $ from "jquery";
-import Table from "./Table.js";
+import MyTable from "./MyTable.js";
 import axios from "axios";
 import querystring from "querystring";
 
@@ -38,8 +38,8 @@ class MyFavorites extends React.Component {
 	  
       
 	  
-    axios.post('http://127.0.0.1:5000/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
-																			    search_value: user_id,
+    axios.post('http://35.226.21.250:80/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
+																			    search_value: user_id
 																			  }))
 		.then((response) => {
         this.setState({
@@ -66,7 +66,7 @@ class MyFavorites extends React.Component {
   render() {
     return (
       <div>
-        <Table dataProp={this.state.data} />
+        <MyTable dataProp={this.state.data} />
 		
       </div>
     );

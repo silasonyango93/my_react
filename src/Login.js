@@ -32,7 +32,7 @@ constructor(props) {
 		
 		
 		
-      axios.post('http://127.0.0.1:5000/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }))
+      axios.post('http://35.226.21.250:80/user_login', querystring.stringify({ AttemptedUserName: this.state.AttemptedUserName,AttemptedPassword: this.state.AttemptedPassword }))
 		.then((response) => {
         this.setState({
           ...this.state,

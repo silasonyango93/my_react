@@ -6,7 +6,7 @@ import querystring from "querystring";
 
 import SingleCharacterTableHeader from "./SingleCharacterTableHeader.js";
 
-class SingleCharacterTable extends React.Component {
+class MySingleCharacterTable extends React.Component {
   constructor(props) {
     super(props);
 
@@ -14,19 +14,16 @@ class SingleCharacterTable extends React.Component {
 				  home_world_details:[],
 				  current_like_icon_colour:'black',
 				  UserId:'',
-				  current_icon:FaHeart,
-				  no_more_likes_allowed:false};
+				  current_icon:FaTrash };
     
 	  
-	this.on_like_icon_pressed = this.on_like_icon_pressed.bind(this); 
-	this.get_number_of_records = this.get_number_of_records.bind(this);
-	this.like_current_item = this.like_current_item.bind(this);
+	this.on_trash_icon_pressed = this.on_trash_icon_pressed.bind(this);  
   }
 	
    
 	
 	componentDidMount() {
-		this.get_number_of_records();
+		
 		
 	   var user_id=window.sessionStorage.getItem("UserId");
        this.setState({
@@ -59,78 +56,20 @@ console.log(home_world_url);
 	
 	
 	
-	on_like_icon_pressed(){
+	on_trash_icon_pressed(){
+		var user_id=window.sessionStorage.getItem("UserId");
 		
-		
-		
-		if(this.state.no_more_likes_allowed===true){
-		
-			this.setState({
-          ...this.state,
-          current_like_icon_colour:'blue'
-           });
-			
-			alert('Kindly you are not allowed to like more than five(5) items');
-			//Do nothing
-			
-		 }else{
-		 
-		       this.like_current_item();
-			 
-		 }
-		
-		
-		
-		
-		
-	}
-	
-	
-	get_number_of_records(){
-	var user_id=window.sessionStorage.getItem("UserId");
-	 axios.post('http://35.226.21.250:80/get_number_of_records', querystring.stringify({column_name: "UserId",
-																			    search_value: user_id,
+		axios.post('http://35.226.21.250:80/delete_individual_my_favorites', querystring.stringify({UserIdColumnName: "UserId",
+																			    user_id_value: user_id,
+																				column_name: "url",
+																				search_value: this.props.dataProp.url
 																			  }))
 		.then((response) => {
-        
-			var my_json=response.data.results;
-		    var count = parseInt(response.data.results[0].NumberOfRecords);
-		     
-		    if(count>4)
-		
-				this.setState({
-                 ...this.state,
-                no_more_likes_allowed:true
-        });
-				
-            })
-        
-    
-     .catch((response) => {
-        //handle error
-        console.log(response);
-      });
-		
-	}
-	
-	
-	like_current_item(){
-		
-		
-	this.setState({
+        this.setState({
           ...this.state,
-          current_like_icon_colour:'red'
+          current_like_icon_colour: 'green'
         });
-	
-	axios.post('http://35.226.21.250:80/add_my_favorites', querystring.stringify({UserId: this.state.UserId,
-																			  name: this.props.dataProp.name,
-																			  height: this.props.dataProp.height,
-																			  mass: this.props.dataProp.mass,
-																			  gender: this.props.dataProp.gender,
-																			  url: this.props.dataProp.url}))
-		.then((response) => {
-        console.log(response);
-			
+			console.log(response);
         })
         
     
@@ -138,7 +77,6 @@ console.log(home_world_url);
         //handle error
         console.log(response);
       });
-	
 	}
 	
   render() {
@@ -148,7 +86,7 @@ console.log(home_world_url);
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default">
-            <div class="panel-heading">Personal Detalis  <this.state.current_icon style={{marginLeft: 70 + 'em',color:this.state.current_like_icon_colour}} onClick={this.on_like_icon_pressed}/> </div>
+            <div class="panel-heading">Personal Detalis  <this.state.current_icon style={{marginLeft: 70 + 'em',color:this.state.current_like_icon_colour}} onClick={this.on_trash_icon_pressed}/> </div>
 
             <div class="panel-body">
               <table
@@ -272,4 +210,4 @@ console.log(home_world_url);
     );
   }
 }
-export default SingleCharacterTable;
+export default MySingleCharacterTable;

@@ -6,6 +6,7 @@ import Home from './Home.js';
 import Login from './Login.js';
 import Table from './Table.js';
 import MyFavorites from './MyFavorites.js';
+import MyAbout from './MyAbout.js';
 
 
 class App extends Component {
@@ -13,9 +14,12 @@ class App extends Component {
     return (
         <Router>
               <div>
-              <h1>W3Adda - Simple SPA</h1>
+              <h1>Star wars characters</h1>
                 <nav>
                   <ul>
+		            <li>
+                      <Link to="/home">Home</Link>
+                    </li>
                     <li>
                       <Link to="/my_favorite_characters">My Favorite Characters</Link>
                     </li>
@@ -28,6 +32,7 @@ class App extends Component {
                 <Route path="/contact" component={Contact} />
 		        <Route path="/home" component={Home} />
 		        <Route path="/my_favorite_characters" component={MyFavorites} />
+		        <Route path="/my_about" component={MyAbout} />
 		        
 		        
               </div>

@@ -3,7 +3,7 @@ import { FaHeart } from 'react-icons/fa';
 import { FaTrash } from 'react-icons/fa';
 import axios from "axios";
 import querystring from "querystring";
-class TableRow extends React.Component {
+class MyTableRow extends React.Component {
 	
   constructor(props) {
     super(props);
@@ -11,11 +11,12 @@ class TableRow extends React.Component {
 	  this.state = {current_icon:FaHeart,show_my_icon:false}
 	  
 	  this.open_new_tab = this.open_new_tab.bind(this);
+	  
    }
 	
 	
    open_new_tab() {
-	   const url = 'http://localhost:3000/about';
+	   const url = 'http://localhost:3000/my_about';
        var character_url = this.props.data.url;
 	   character_url=character_url+"?format=json";
 	   var w = window.open(url);
@@ -75,6 +76,8 @@ class TableRow extends React.Component {
 	
 	componentWillUnmount(){window.sessionStorage.setItem("current_icon", "heart_icon");}
 	
+	
+	
    render() {
       return (
 		  
@@ -83,7 +86,7 @@ class TableRow extends React.Component {
             <td>{this.props.data.height}</td>
             <td>{this.props.data.mass}</td>
 		    <td>{this.props.data.gender}</td>
-		  <td><this.state.current_icon style={this.state.show_my_icon ? {} : { display: 'none' }} /></td>
+		  
 		  
          </tr>
 		  
@@ -91,4 +94,4 @@ class TableRow extends React.Component {
       );
    }
 }
-export default TableRow;
+export default MyTableRow;
