@@ -29,10 +29,13 @@ class MyFavorites extends React.Component {
 
     
   }
+	
+  componentWillMount(){window.sessionStorage.setItem("current_icon", "trash_icon");}
 
   componentDidMount() {
 	  
 	  var user_id=window.sessionStorage.getItem("UserId");
+	  
       
 	  
     axios.post('http://127.0.0.1:5000/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
@@ -53,6 +56,9 @@ class MyFavorites extends React.Component {
       });
 
   }
+	
+	
+  
 	
 	
     

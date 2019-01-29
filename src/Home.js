@@ -29,6 +29,9 @@ class Home extends React.Component {
 
     
   }
+	
+	
+  componentWillMount(){window.sessionStorage.setItem("current_icon", "heart_icon");}
 
   componentDidMount() {
     fetch("https://swapi.co/api/people/?format=json")

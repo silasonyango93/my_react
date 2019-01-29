@@ -1,11 +1,12 @@
 import React from 'react';
 import { FaHeart } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 class TableRow extends React.Component {
 	
   constructor(props) {
     super(props);
 
-    
+	  this.state = {current_icon:FaHeart}
 	  
 	  this.open_new_tab = this.open_new_tab.bind(this);
    }
@@ -18,7 +19,27 @@ class TableRow extends React.Component {
 	   var w = window.open(url);
 	   w.character_url = character_url;
 	   
-    }  
+    } 
+	
+	
+	componentWillMount(){
+   var current_icon=window.sessionStorage.getItem("current_icon");
+	   if(current_icon==="trash_icon"){
+	   this.setState({
+          ...this.state,
+          current_icon: FaTrash
+        });
+	   }else{
+	   this.setState({
+          ...this.state,
+          current_icon: FaHeart
+        });
+	   }
+   
+   }
+	
+	
+	componentWillUnmount(){window.sessionStorage.setItem("current_icon", "heart_icon");}
 	
    render() {
       return (
@@ -28,7 +49,7 @@ class TableRow extends React.Component {
             <td>{this.props.data.height}</td>
             <td>{this.props.data.mass}</td>
 		    <td>{this.props.data.gender}</td>
-		  <td><FaHeart /></td>
+		  <td><this.state.current_icon /></td>
 		  
          </tr>
 		  

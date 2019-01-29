@@ -1,5 +1,6 @@
 import React from "react";
 import { FaHeart } from 'react-icons/fa';
+import { FaTrash } from 'react-icons/fa';
 import axios from "axios";
 import querystring from "querystring";
 
@@ -9,13 +10,21 @@ class SingleCharacterTable extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: this.props.dataProp,home_world_details:[], current_like_icon_colour:'black',UserId:'' };
-    console.log(this.props.dataProp.name);
+    this.state = { data: this.props.dataProp,
+				  home_world_details:[],
+				  current_like_icon_colour:'black',
+				  UserId:'',
+				  current_icon:FaHeart };
+    
 	  
 	this.on_like_icon_pressed = this.on_like_icon_pressed.bind(this);  
   }
 	
-   componentDidMount() {
+   
+	
+	componentDidMount() {
+		
+		
 	   var user_id=window.sessionStorage.getItem("UserId");
        this.setState({
           ...this.state,
@@ -79,7 +88,7 @@ console.log(home_world_url);
       <div class="row">
         <div class="col-lg-12">
           <div class="panel panel-default">
-            <div class="panel-heading">Personal Detalis  <FaHeart style={{marginLeft: 70 + 'em',color:this.state.current_like_icon_colour}} onClick={this.on_like_icon_pressed}/> </div>
+            <div class="panel-heading">Personal Detalis  <this.state.current_icon style={{marginLeft: 70 + 'em',color:this.state.current_like_icon_colour}} onClick={this.on_like_icon_pressed}/> </div>
 
             <div class="panel-body">
               <table
