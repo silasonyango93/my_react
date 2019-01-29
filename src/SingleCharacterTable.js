@@ -55,11 +55,11 @@ console.log(home_world_url);
 		
 		
 		axios.post('http://127.0.0.1:5000/add_my_favorites', querystring.stringify({UserId: this.state.UserId,
-																			  Name: this.props.dataProp.name,
-																			  Height: this.props.dataProp.height,
-																			  Mass: this.props.dataProp.mass,
-																			  Gender: this.props.dataProp.gender,
-																			  Url: this.props.dataProp.url}))
+																			  name: this.props.dataProp.name,
+																			  height: this.props.dataProp.height,
+																			  mass: this.props.dataProp.mass,
+																			  gender: this.props.dataProp.gender,
+																			  url: this.props.dataProp.url}))
 		.then((response) => {
         console.log(response);
 			

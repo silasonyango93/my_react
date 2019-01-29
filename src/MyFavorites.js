@@ -2,8 +2,9 @@ import React from "react";
 import $ from "jquery";
 import Table from "./Table.js";
 import axios from "axios";
+import querystring from "querystring";
 
-class Home extends React.Component {
+class MyFavorites extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,24 +24,32 @@ class Home extends React.Component {
           name: "Baz",
           age: "40"
         }
-      ],
-      star_wars_characters: []
+      ]
     };
 
     
   }
 
   componentDidMount() {
-    fetch("https://swapi.co/api/people/?format=json")
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-      console.log(data.results);
+	  
+	  var user_id=window.sessionStorage.getItem("UserId");
+      
+	  
+    axios.post('http://127.0.0.1:5000/get_specific_my_favorites', querystring.stringify({column_name: "UserId",
+																			    search_value: user_id,
+																			  }))
+		.then((response) => {
         this.setState({
           ...this.state,
-          data: data.results
+          data: response.data.results
         });
+			console.log(response);
+        })
+        
+    
+     .catch((response) => {
+        //handle error
+        console.log(response);
       });
 
   }
@@ -52,9 +61,10 @@ class Home extends React.Component {
     return (
       <div>
         <Table dataProp={this.state.data} />
+		
       </div>
     );
   }
 }
 
-export default Home;
+export default MyFavorites;

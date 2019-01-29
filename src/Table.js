@@ -5,7 +5,7 @@ class Table extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { data: this.props.dataProp };
+    this.state = { data: this.props.dataProps };
     console.log(this.props.dataProp)
 	  
 	  
