@@ -15,7 +15,7 @@ class TableRow extends React.Component {
 	
 	
    open_new_tab() {
-	   const url = 'http://localhost:3000/about';
+	   const url = 'http://35.226.21.250:3000/about';
        var character_url = this.props.data.url;
 	   character_url=character_url+"?format=json";
 	   var w = window.open(url);
