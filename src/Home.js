@@ -2,6 +2,7 @@ import React from "react";
 import $ from "jquery";
 import Table from "./Table.js";
 import axios from "axios";
+import querystring from "querystring";
 
 class Home extends React.Component {
   constructor(props) {
@@ -31,7 +32,12 @@ class Home extends React.Component {
   }
 	
 	
-  componentWillMount(){window.sessionStorage.setItem("current_icon", "heart_icon");}
+  componentWillMount(){
+	  window.sessionStorage.setItem("current_icon", "heart_icon");
+  
+  
+  
+  }
 
   componentDidMount() {
     fetch("https://swapi.co/api/people/?format=json")
